@@ -1,5 +1,7 @@
 Umbrello (fork/download from official site)
-==
+===
+
+Generating php5 code with umbrello.
 
 ####To install qt-sdk (ubuntu)
 >> sudo apt-get install qt-sdk (complete package)
