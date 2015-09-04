@@ -19,6 +19,7 @@
 #include "operation.h"
 #include "umldoc.h"
 
+#include <iostream>
 #include <QRegExp>
 #include <QTextStream>
 
@@ -3037,7 +3038,7 @@ void Php5Writer::writeClass(UMLClassifier *c)
         php<<str<<m_endl;
     } else {
         php << "<?php" << m_endl;
-        php << "namespace " << package << ";" << m_endl;
+        php << "namespace " << package << ";" << m_endl << m_endl;
     }
 
     //write includes
@@ -3050,7 +3051,19 @@ void Php5Writer::writeClass(UMLClassifier *c)
             //php << "require_once '" << headerName << "';" << m_endl;
             headerName.replace(QLatin1String("/"), QLatin1String("\\"));
             headerName.replace(QLatin1String(".php"), QLatin1String(""));
-            php << "use \\" << headerName << ";" << m_endl;
+
+            QList<QString> tipos;
+            tipos.append(QLatin1String("int"));
+            tipos.append(QLatin1String("bool"));
+            tipos.append(QLatin1String("array"));
+
+            if ( tipos.indexOf( headerName ) == -1 ) {
+
+                php << "use \\" << headerName << ";" << m_endl;
+
+            } else {
+                uWarning() << "não printou int";
+            }
         }
     }
     php << m_endl;
